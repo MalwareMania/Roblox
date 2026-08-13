@@ -1,6 +1,6 @@
 # Roblox
 
-This repository is for:
+### This repository is for:
 
 ## Posting offsets
 
@@ -15,6 +15,8 @@ Updated daily:
 | `version-....h` | Previous Roblox versions/hashes |
 
 If something isn't uploaded that usually means 1 of the offsets/encryptions/structs haven't changed in a new update
+
+If something isn't uploaded even if all 3 have changed that usually means i'm not home or unavailable
 
 # Checking
 
