@@ -22,4 +22,4 @@ Sometimes offsets/encryptions/structs are **untested** before uploading - or not
 
 # Issues
 
-If something was wrong please submit an issue or message me on discord - **sailz11**
+If something is wrong please submit an issue or message me on discord - **sailz11**
