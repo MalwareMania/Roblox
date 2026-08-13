@@ -9,10 +9,10 @@ This repository is for:
 **Posting Structs**
 
 Updated daily:
-| Offsets | Version / Hash |
+| Roblox | Version / Hash |
 |---|---|
-| **Latest** | Latest pushed Roblox version/hash |
-| `version-...` | Previous Roblox versions/hashes |
+| **Latest.h** | Latest pushed Roblox version/hash |
+| `version-....h` | Previous Roblox versions/hashes |
 
 # Checking
 
