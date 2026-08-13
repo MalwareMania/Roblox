@@ -1,4 +1,5 @@
 // Probably Proto is the most notable struct here, many changes
+// Credits to my partner, not confirmed by me atm
 
 struct TString
 {
