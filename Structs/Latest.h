@@ -131,7 +131,7 @@ struct lua_State
     GCObject* gclist; // 0x40
     UpVal* openupval; // 0x48
     LuaTable* gt; // 0x50
-    ExtraSpace* userdata; // 0x58
+    RbxExtraSpace* userdata; // 0x58
     CallInfo* end_ci; // 0x60
     CallInfo* base_ci; // 0x68
 
