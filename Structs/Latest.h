@@ -94,3 +94,51 @@ struct Proto
     Proto* deoptimized; // 0xC8
     uint64_t cost; // 0xD0
 };
+
+struct CallInfo
+{
+    StkId base; // 0x00
+    StkId func; // 0x08
+    Proto* p; // 0x10
+    StkId top;  // 0x18
+
+    union
+    {
+        int errfunc; // 0x20
+        const Instruction* savedpc; // 0x20
+    };
+
+    int nresults; // 0x28
+    unsigned int flags; // 0x2C
+} CallInfo;
+
+struct lua_State
+{
+    CommonHeader; // 0x0
+    uint8_t status; // 0x03
+    uint8_t activememcat; // 0x04
+    bool singlestep; // 0x05
+    bool isactive; // 0x06
+    uint8_t pad07; // 0x07
+
+    StkId top; // 0x08
+    StkId stack_last; // 0x10
+    CallInfo* ci; // 0x18
+    global_State* global; // 0x20
+    StkId base; // 0x28
+    StkId stack; // 0x30
+    TString* namecall; // 0x38
+    GCObject* gclist; // 0x40
+    UpVal* openupval; // 0x48
+    LuaTable* gt; // 0x50
+    ExtraSpace* userdata; // 0x58
+    CallInfo* end_ci; // 0x60
+    CallInfo* base_ci; // 0x68
+
+    unsigned short nCcalls; // 0x70
+    unsigned short baseCcalls; // 0x72
+    int cachedslot; // 0x74
+
+    LSTATE_STACKSIZE_ENC<int> stacksize; // 0x78
+    int size_ci; // 0x7C
+};
