@@ -2,17 +2,19 @@
 
 This repository is for:
 
-**Posting Offsets**
+## Posting offsets
 
-**Posting Encryptions**
+## Posting encryptions
 
-**Posting Structs**
+## Posting structs
 
 Updated daily:
 | Roblox | Version / Hash |
 |---|---|
 | **Latest.h** | Latest pushed Roblox version/hash |
 | `version-....h` | Previous Roblox versions/hashes |
+
+If something isn't uploaded that usually means 1 of the offsets/encryptions/structs haven't changed in a new update
 
 # Checking
 
