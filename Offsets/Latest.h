@@ -75,7 +75,7 @@ namespace Offsets
     
     namespace Extra
     {
-        inline const uintptr_t RequireBypass = 0x810;
+        inline const uintptr_t RequireBypass = 0x898;
         inline const uintptr_t ScriptContextToResume = 0x7E0;
     }
 }
