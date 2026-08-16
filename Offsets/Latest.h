@@ -35,13 +35,12 @@ namespace Offsets
 
     namespace Touch
     {
-        // Could be wrong
-        const uintptr_t FireLeftMouseClick = REBASE(0x4F11E30);
-        const uintptr_t FireRightMouseClick = REBASE(0x4F124B0);
-        const uintptr_t FireMouseHoverEnter = REBASE(0x4EC9630);
-        const uintptr_t FireMouseHoverLeave = REBASE(0x4EF8EA0);
-        const uintptr_t FireProximityPrompt = REBASE(0x4F12630);
-        const uintptr_t FireTouchInterest = REBASE(0x1E46C30);
+        inline const uintptr_t FireLeftMouseClick = REBASE(0x50FF0A0);
+        inline const uintptr_t FireRightMouseClick = REBASE(0x50FF240);
+        inline const uintptr_t FireMouseHoverEnter = REBASE(0x5100690);
+        inline const uintptr_t FireMouseHoverLeave = REBASE(0x5100830);
+        inline const uintptr_t FireProximityPrompt = REBASE(0x4F12630);
+        inline const uintptr_t FireTouchInterest = REBASE(0x1E46C30);
     }
 
     namespace Task
@@ -52,7 +51,7 @@ namespace Offsets
     namespace DataModel
     {
         inline const uintptr_t FakeDataModel = REBASE(0x8B79B58);
-        inline const uintptr_t RealDataModel = 0x1D0;
+        inline const uintptr_t RealDataModel = 0x1D8;
 
         inline const uintptr_t ScriptContext = 0x440;
         inline const uintptr_t GameLoaded = 0x570;
