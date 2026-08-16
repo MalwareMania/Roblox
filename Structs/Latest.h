@@ -1,7 +1,9 @@
 // Probably Proto is the most notable struct here, many changes
 // Credits to my partner, not confirmed by me atm
 
-#define CommonHeader \ uint8_t tt; // 0x0 \ uint8_t memcat; // 0x01 \ uint8_t marked; // 0x02
+#define CommonHeader \ uint8_t tt; // 0x0
+\ uint8_t memcat; // 0x01 
+\ uint8_t marked; // 0x02
 
 struct TString
 {
