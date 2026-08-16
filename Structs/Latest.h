@@ -1,6 +1,8 @@
 // Probably Proto is the most notable struct here, many changes
 // Credits to my partner, not confirmed by me atm
 
+#define CommonHeader \ uint8_t tt; // 0x0 \ uint8_t memcat; // 0x01 \ uint8_t marked; // 0x02
+
 struct TString
 {
     CommonHeader; // 0x0
@@ -19,6 +21,88 @@ struct Udata
     int32_t len; // 0x04
     UDATA_META_ENC<LuaTable*> metatable; // 0x08
     char data[1]; // 0x10
+};
+
+struct CallInfo
+{
+    StkId base; // 0x00
+    StkId func; // 0x08
+    Proto* p; // 0x10
+    StkId top;  // 0x18
+
+    union
+    {
+        int errfunc; // 0x20
+        const Instruction* savedpc; // 0x20
+    };
+
+    int nresults; // 0x28
+    unsigned int flags; // 0x2C
+} CallInfo;
+
+struct stringtable
+{
+    struct TString** hash; // 0x0
+    uint32_t nuse; // 0x8
+    int size; // 0xC
+};
+
+struct lua_Debug
+{
+    void* userdata; // 0x0
+    uint8_t nupvals; // 0x8
+    uint8_t nparams; // 0x9
+    uint8_t isvararg; // 0xA
+    uint8_t pad01; // 0xB
+    int linedefined; // 0xC
+    int currentline; // 0x10
+    uint32_t pad04; // 0x14
+    const char* source; // 0x18
+    const char* what; // 0x20
+    const char* short_src; // 0x28
+    const char* name; // 0x30
+    char ssbuf[LUA_IDSIZE]; // 0x38
+};
+
+struct lua_Callbacks
+{
+    void* userdata; // 0x0
+    void (*onallocate)(lua_State* L, size_t osize, size_t nsize); // 0x8
+    void (*panic)(lua_State* L, int errcode); // 0x10
+    void (*interrupt)(lua_State* L, int gc); // 0x18
+    void (*debugstep)(lua_State* L, lua_Debug* ar); // 0x20
+    void (*debugprotectederror)(lua_State* L); // 0x28
+    void (*userthread)(lua_State* LP, lua_State* L); // 0x30
+    void (*debugbreak)(lua_State* L, lua_Debug* ar); // 0x38
+    int16_t (*useratom)(lua_State* L, const char* s, size_t l); // 0x40
+    void (*debuginterrupt)(lua_State* L, lua_Debug* ar); // 0x48
+};
+
+struct Shared
+{
+    int ThreadCount; // 0x0
+    uint32_t pad04; // 0x4
+    void* ScriptVMState; // 0x8
+    void* ScriptContext; // 0x10
+    char Threads[0x18]; // 0x18
+};
+
+struct RobloxExtraSpace
+{
+    char Hook[0x18]; // 0x0
+    std::shared_ptr<Shared> Shared; // 0x18
+    RobloxExtraSpace* FlyWeightNode; // 0x28
+    void* Continuations; // 0x30
+    uint64_t Capabilities; // 0x38
+    uint32_t Identity; // 0x40
+    uint32_t pad04; // 0x44
+    uint64_t pad08; // 0x48
+    uint64_t pad08_1; // 0x50
+    std::weak_ptr<uintptr_t> Source; // 0x58
+    std::shared_ptr<uintptr_t> Object; // 0x68
+    uint64_t pad08_2; // 0x78
+    uint64_t pad08_3; // 0x80
+    std::weak_ptr<uintptr_t> Actor; // 0x88
 };
 
 struct Closure
@@ -96,23 +180,6 @@ struct Proto
     uint64_t cost; // 0xD0
 };
 
-struct CallInfo
-{
-    StkId base; // 0x00
-    StkId func; // 0x08
-    Proto* p; // 0x10
-    StkId top;  // 0x18
-
-    union
-    {
-        int errfunc; // 0x20
-        const Instruction* savedpc; // 0x20
-    };
-
-    int nresults; // 0x28
-    unsigned int flags; // 0x2C
-} CallInfo;
-
 struct lua_State
 {
     CommonHeader; // 0x0
@@ -142,4 +209,63 @@ struct lua_State
 
     LSTATE_STACKSIZE_ENC<int> stacksize; // 0x78
     int size_ci; // 0x7C
+};
+
+
+struct global_State
+{
+    stringtable strt; // 0x0
+    GCObject* gray; // 0x10
+    GCObject* grayagain; // 0x18
+    GCObject* weak; // 0x20
+    lua_Alloc frealloc; // 0x28
+    void* ud; // 0x30
+    int gcstepsize; // 0x38
+    int gcstepmul; // 0x3C
+    int gcgoal; // 0x40
+    uint32_t pad04; // 0x44
+    size_t GCthreshold; // 0x48
+    size_t totalbytes; // 0x50
+    uint8_t currentwhite; // 0x58
+    uint8_t gcstate; // 0x59
+    uint16_t pad06_0; // 0x5A
+    uint16_t pad06_1; // 0x5C
+    uint16_t pad06_2; // 0x5E
+    lua_Page* freepages[LUA_SIZECLASSES]; // 0x60
+    lua_State* mainthread; // 0x1A0
+    lua_Page* sweepgcopage; // 0x1A8
+    lua_Page* freegcopages[LUA_SIZECLASSES]; // 0x1B0
+    lua_Page* allgcopages; // 0x2F0
+    lua_Page* allpages; // 0x2F8
+    UpVal uvhead; // 0x300
+    LuaTable* mt[LUA_T_COUNT]; // 0x328
+    TString* tmname[TM_N]; // 0x398
+    TString* ttname[LUA_T_COUNT]; // 0x440
+    TValue pseudotemp; // 0x4B0
+    TValue registry; // 0x4C0
+    registryfree_t registryfree; // 0x4D0
+    uint32_t pad04_1; // 0x4D4
+    struct lua_jmpbuf* errorjmp; // 0x4D8
+    lua_Callbacks cb; // 0x4E0
+    uint64_t rngstate; // 0x530
+    uint64_t ptrenckey[4]; // 0x538
+    lua_ExecutionCallbacks ecb; // 0x558
+    alignas(16) uint8_t ecbdata[LUA_EXECUTION_CALLBACK_STORAGE]; // 0x5A0
+    lua_UdataDirectAccessData udatadirect[UTAG_INTERNAL_LIMIT]; // 0x7A0
+    size_t memcatbytes[LUA_MEMORY_CATEGORIES]; // 0x2C30
+    void (*udatagc[LUA_UTAG_LIMIT])(lua_State*, void*); // 0x3430
+    void (*udatamark[LUA_UTAG_LIMIT])(lua_State*, void*); // 0x3830
+    LuaTable* udatamt[LUA_UTAG_LIMIT]; // 0x3C30
+    TValue weakregistry; // 0x4030
+    int weakregistryfree; // 0x4040
+    uint32_t pad04_2; // 0x4044
+    lua_EmbedderGc embeddergc; // 0x4048
+    TString* lightuserdataname[LUA_LUTAG_LIMIT]; // 0x4050
+    LuaTable* udatadirectfields[UTAG_INTERNAL_LIMIT]; // 0x4450
+    GCStats gcstats; // 0x4850
+    uint32_t lastprotoid; // 0x4918
+    uint32_t pad04_3; // 0x491C
+#ifdef LUAI_GCMETRICS
+    GCMetrics gcmetrics;
+#endif
 };
