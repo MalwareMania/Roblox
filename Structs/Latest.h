@@ -87,11 +87,11 @@ struct Shared
     char Threads[0x18]; // 0x18
 };
 
-struct RobloxExtraSpace
+struct RbxExtraSpace
 {
     char Hook[0x18]; // 0x0
     std::shared_ptr<Shared> Shared; // 0x18
-    RobloxExtraSpace* FlyWeightNode; // 0x28
+    RbxExtraSpace* FlyWeightNode; // 0x28
     void* Continuations; // 0x30
     uint64_t Capabilities; // 0x38
     uint32_t Identity; // 0x40
