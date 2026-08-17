@@ -101,7 +101,7 @@ struct RbxExtraSpace
     uint64_t pad08; // 0x48
     uint64_t pad08_1; // 0x50
     std::weak_ptr<uintptr_t> Source; // 0x58
-    std::shared_ptr<uintptr_t> Object; // 0x68
+    std::shared_ptr<uintptr_t> Random_Refcounted_Object; // 0x68
     uint64_t pad08_2; // 0x78
     uint64_t pad08_3; // 0x80
     std::weak_ptr<uintptr_t> Actor; // 0x88
