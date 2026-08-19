@@ -20,7 +20,7 @@ namespace Offsets
 
     namespace Properties
     {
-        inline const uintptr_t GetPropertyData = REBASE(0xD65F90);
+        inline const uintptr_t GetPropertyData = REBASE(0xD70670);
         inline const uintptr_t GetProperty = REBASE(0x8E90A0);
     }
 
