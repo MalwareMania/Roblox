@@ -22,6 +22,23 @@ struct Udata
     char data[1]; // 0x10
 };
 
+struct CallInfo
+{
+    StkId base; // 0x0
+    StkId func; // 0x08
+    Proto* p; // 0x10
+    StkId top; // 0x18
+
+    union
+    {
+        const Instruction* savedpc;
+        int errfunc;
+    }; 
+
+    int nresults;
+    uint32_t flags;
+};
+
 struct Closure
 {
     CommonHeader; // 0x0
@@ -100,19 +117,35 @@ struct Proto
     uint64_t cost; // 0xD0
 }; 
 
-struct CallInfo
+struct lua_State
 {
-    StkId base; // 0x0
-    StkId func; // 0x08
-    Proto* p; // 0x10
-    StkId top; // 0x18
+    CommonHeader; // 0x0
 
-    union
-    {
-        const Instruction* savedpc;
-        int errfunc;
-    }; 
+    uint8_t status; // 0x03
+    uint8_t activememcat; // 0x04
+    bool singlestep; // 0x05
+    bool isactive; // 0x06
+    uint8_t pad07; // 0x07
 
-    int nresults;
-    uint32_t flags;
+    unsigned short nCcalls; // 0x08
+    unsigned short baseCcalls; // 0x0A
+    int cachedslot; // 0x0C
+
+    LSTATE_STACKSIZE_ENC<int> stacksize; // 0x10
+    int size_ci; // 0x14
+
+    GCObject* gclist; // 0x18
+    UpVal* openupval; // 0x20
+    RbxExtraSpace* userdata; // 0x28
+    global_State* global; // 0x30
+    StkId base; // 0x38
+    StkId stack; // 0x40
+    StkId stack_last; // 0x48
+    CallInfo* ci; // 0x50
+    StkId top; // 0x58
+    CallInfo* end_ci; // 0x60
+    CallInfo* base_ci; // 0x68
+
+    LuaTable* gt; // 0x70
+    TString* namecall; // 0x78
 };
