@@ -3,7 +3,7 @@ namespace Offsets
     inline const uintptr_t Print = REBASE(0x1C68F60);
     inline const uintptr_t ScriptContextResume = REBASE(0x40CA400);
     inline const uintptr_t OpcodeLookupTable = REBASE(0x6CEFD50);
-    inline const uintptr_t GetGlobalState = REBASE(0x40B2130);
+    inline const uintptr_t GetGlobalState = REBASE(0x402A8B0);
     inline const uintptr_t CastArgs = REBASE(0x3F93C30);
     inline const uintptr_t PushInstance = REBASE(0x4012EF0);
 
