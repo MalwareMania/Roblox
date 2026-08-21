@@ -1,3 +1,5 @@
+// Credits to my partner again
+
 #define CommonHeader \ uint8_t tt; // 0x0
 \ uint8_t memcat; // 0x01 
 \ uint8_t marked; // 0x02
