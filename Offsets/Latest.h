@@ -9,7 +9,7 @@ namespace Offsets
 
     namespace Identity
     {
-        inline const uintptr_t Identity = REBASE(0x81570C8); // This could be wrong
+        inline const uintptr_t Identity = REBASE(0x815E708);
         inline const uintptr_t GetIdentityStruct = REBASE(0x4250);
     }
 
@@ -75,6 +75,6 @@ namespace Offsets
     namespace Extra
     {
         inline const uintptr_t RequireBypass = 0xBB4;
-        inline const uintptr_t ScriptContextToResume = 0x9E0;
+        inline const uintptr_t ResumeFacet = 0x9E0;
     }
 }
